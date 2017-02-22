@@ -1,5 +1,13 @@
 
 
+
+//---------------------------------------------------------
+//| d0| d1| d2| d3| d4| d5| d6| d7| d8| d9|d10|d11|d12|d13|
+//---------------------------------------------------------
+// | x| x | x | x | x | x | x | x | x | x | x |   |   |   | 
+//---------------------------------------------------------
+
+
 // ENTRADAS DIGITALES Y FINAL DE CARRERA-----------
 #define BOTON 4
 #define ACTIVO_BOTON 0
@@ -43,11 +51,56 @@ void setup() {
   digitalWrite (RELE2, PARO_RELE);
   digitalWrite (RELE3, PARO_RELE);
   digitalWrite (RELE4, PARO_RELE);
+  
   pruebasiniciales();
 
 }//fin setup()
 //=================================================================================================
 void loop (){
-  delay(10);
+  delay (1);
 }//fin loop()
+//=================================================================================================
+void avanzaMotor (){
+
+  int pasos = 300; // cantidad de pasos
+  int TIEMPO = 1; 
+    digitalWrite (PIN_DIR, DIR_AVANZA);
+  for (int i = 0; i <= pasos; i++)
+  {
+    digitalWrite (PIN_STEP, HIGH);
+    delay( TIEMPO);
+    digitalWrite (PIN_STEP, LOW);
+    delay( TIEMPO);
+  }
+  
+}
+//=================================================================================================
+void retrocesoMotor (){
+
+  int pasos = 300; // cantidad de pasos
+  int TIEMPO = 1; 
+  
+  digitalWrite (PIN_DIR, DIR_RETROCESO);
+  for (int i = 0; i <= pasos; i++)
+  {
+    digitalWrite (PIN_STEP, HIGH);
+    delay( TIEMPO);
+    digitalWrite (PIN_STEP, LOW);
+    delay( TIEMPO);
+  }
+  
+}
+//=================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
 
