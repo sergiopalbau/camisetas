@@ -1,4 +1,4 @@
-void pruebasiniciales() {
+void pruebasIniciales() {
 
 
   // prueba rele - se activiara cada rele durante un segundo --------------------------
@@ -65,18 +65,22 @@ void pruebasiniciales() {
     boton1 = digitalRead (BOTON);
     final1 = digitalRead (FINAL_FIN);
     final2 = digitalRead (FINAL_INICIO);
+    
     if ( boton1 == ACTIVO_BOTON)
       Serial.print ( "BOTON: ON \t");
     else
       Serial.print ( "BOTON: OFF \t");
+   
     if (final1 == ACTIVO_F_F)
       Serial.print ( "FINAL FIN: ON \t");
     else
       Serial.print ( "FINAL FIN: OFF \t");
+   
     if ( final1 == ACTIVO_F_F)
       Serial.println ( "FINAL INCIO: ON \t");
     else
       Serial.println ( "FINAL INICIO: OFF \t");
+   
     delay (1000);
   } while (1);
 

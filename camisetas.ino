@@ -21,9 +21,9 @@
 #define DIR_AVANZA 1
 #define DIR_RETROCESO 0
 // RELES -----------------------------------------
-#define RELE1 10
-#define RELE2 9
-#define RELE3 8
+#define RELE1 10    // bomba1
+#define RELE2 9     // bomba2
+#define RELE3 8     // alimentacion easydriver
 #define RELE4 7
 #define ACTIVO_RELE 1
 #define PARO_RELE 0
@@ -52,46 +52,52 @@ void setup() {
   digitalWrite (RELE3, PARO_RELE);
   digitalWrite (RELE4, PARO_RELE);
   
-  pruebasiniciales();
+pruebasIniciales();
 
 }//fin setup()
+
+
 //=================================================================================================
 void loop (){
-  delay (1);
+  Serial.println ("pulse el boton para comenzar ...");
+  boolean botonAZ = false;
+  boolean salida = false;
+  do
+  {
+    botonAZ =digitalRead (BOTON);
+    if (botonAZ == ACTIVO_BOTON);
+    {
+      delay(40);
+      botonAZ =digitalRead (BOTON);  
+      if (botonAZ == ACTIVO_BOTON);
+           salida = true;      
+    }
+  
+  }while (!salida);
+
+  
+  
+  digitalWrite ( RELE3, ACTIVO_RELE);      // alimentamos el rele del easy driver
+  avanzaN (10,1);
+  digitalWrite (RELE1, ACTIVO_RELE);    // BOMBA 1
+  do
+  {
+    avanzaN (50,1);
+    
+  } while ( digitalRead (FINAL_FIN));
+  digitalWrite (RELE1, PARO_RELE);    // BOMBA 1 parada
+
+  do
+  {
+    retrocesoN (50,1);
+    
+  }while (digitalRead (FINAL_INICIO));
+  digitalWrite(RELE3, PARO_RELE);
+  Serial.println ("FIN DEL PROCESO 1");
+
+
+  
 }//fin loop()
-//=================================================================================================
-void avanzaMotor (){
-
-  int pasos = 300; // cantidad de pasos
-  int TIEMPO = 1; 
-    digitalWrite (PIN_DIR, DIR_AVANZA);
-  for (int i = 0; i <= pasos; i++)
-  {
-    digitalWrite (PIN_STEP, HIGH);
-    delay( TIEMPO);
-    digitalWrite (PIN_STEP, LOW);
-    delay( TIEMPO);
-  }
-  
-}
-//=================================================================================================
-void retrocesoMotor (){
-
-  int pasos = 300; // cantidad de pasos
-  int TIEMPO = 1; 
-  
-  digitalWrite (PIN_DIR, DIR_RETROCESO);
-  for (int i = 0; i <= pasos; i++)
-  {
-    digitalWrite (PIN_STEP, HIGH);
-    delay( TIEMPO);
-    digitalWrite (PIN_STEP, LOW);
-    delay( TIEMPO);
-  }
-  
-}
-//=================================================================================================
-
 
 
 
